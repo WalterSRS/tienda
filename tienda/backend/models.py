@@ -1,10 +1,18 @@
 from django.db import models
+import hashlib
 
 # Create your models here.
 class Usuario(models.Model):
-    username = models.CharField(max_length=15)
+    username = models.CharField(unique = True, max_length=15)
     password = models.CharField(max_length=255)
     nombre = models.CharField(max_length=30)
+    
+    def save(self, *args, **kwargs):
+        if len(self.password) != 255:
+            self.password = hashlib.sha256(self.password.encode()).hexdigest()
+        super().save(*args, **kwargs)
+        
+    
     
 class Categoria(models.Model):
     nombre = models.CharField(max_length=50)
