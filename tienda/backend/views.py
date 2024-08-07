@@ -15,6 +15,13 @@ class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
     
+    @action(detail=True, methods=['get'])
+    def getproduct(self, request, pk=None):
+        print(request)
+        #categoria = Categoria.objects.get(id = 1)
+        productos = Producto.objects.filter(categoria = pk).values()
+        return Response(productos)
+    
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
