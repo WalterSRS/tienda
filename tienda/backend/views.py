@@ -5,6 +5,9 @@ from .serializer import ProductoSerializer, CategoriaSerializer, UsuarioSerializ
 from rest_framework.response import Response
 from rest_framework.decorators import action
 import hashlib
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 # Create your views here.
 
 class ProductoViewSet(viewsets.ModelViewSet):
@@ -22,21 +25,23 @@ class CategoriaViewSet(viewsets.ModelViewSet):
         productos = Producto.objects.filter(categoria = pk).values()
         return Response(productos)
     
+
+
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
-    
-    @action(detail=False, methods=['post'])
-    def login(self, request, pk=None):
-        username = request.POST['username']
-        password = hashlib.sha256(request.POST['password'].encode()).hexdigest()
+
+    @action(detail=False, methods=['post'], url_path='login')
+    def login(self, request):
+        username = request.data.get('username')
+        password = hashlib.sha256(request.data.get('password').encode()).hexdigest()
         try:
             usuario = Usuario.objects.get(username=username)
             if usuario.password == password:
-                return Response({'valido':True})
+                return Response({'valido': "True", 'mensaje': 'Usuario coincide', 'result': {'token': 'dummy_token'}})
             else:
-                return Response({'valido':False})
+                return Response({'valido': "False", 'mensaje': 'Contraseña incorrecta'})
         except Usuario.DoesNotExist:
-            return Response({'error':'Usuario no existe'})
+            return Response({'valido': "False", 'mensaje': 'Usuario no existe'})
         
-    
+        
