@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../assetss/css/Home.css';
 import axios from 'axios';
 import { Apiurl } from "../service/apirest";
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [categorias, setCategorias] = useState([]);
@@ -12,6 +13,7 @@ const Home = () => {
         const carritoGuardado = sessionStorage.getItem("carrito");
         return carritoGuardado ? JSON.parse(carritoGuardado) : [];
     });
+    const navigate = useNavigate(); // Para redirigir
 
     useEffect(() => {
         fetchCategorias();
@@ -68,21 +70,27 @@ const Home = () => {
         setCarrito(prevCarrito => prevCarrito.filter(p => p.id !== id));
     };
 
-    // Función para calcular el total
     const calcularTotal = () => {
         return carrito.reduce((total, producto) => 
             total + (producto.precio_unitario * producto.cantidad), 0).toFixed(2);
     };
 
-    // Función para manejar el pago (aquí solo mostramos un alert)
     const manejarPago = () => {
         alert(`Total a pagar: $${calcularTotal()}`);
-        // Aquí podrías implementar la lógica para procesar el pago
+    };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("carrito");
+        navigate("/");
     };
 
     return (
         <div>
-            <h1>Productos</h1>
+            <div className="header">
+                <h1>Productos</h1>
+                <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
+            </div>
             {error && <p className="error">{error}</p>}
             <div className="container">
                 <div className="categorias">
