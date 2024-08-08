@@ -8,11 +8,18 @@ const Home = () => {
     const [productos, setProductos] = useState([]);
     const [selectedCategoria, setSelectedCategoria] = useState(null);
     const [error, setError] = useState("");
-    const [carrito, setCarrito] = useState([]); // Nuevo estado para el carrito
+    const [carrito, setCarrito] = useState(() => {
+        const carritoGuardado = sessionStorage.getItem("carrito");
+        return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+    });
 
     useEffect(() => {
         fetchCategorias();
     }, []);
+
+    useEffect(() => {
+        sessionStorage.setItem("carrito", JSON.stringify(carrito));
+    }, [carrito]);
 
     const fetchCategorias = async () => {
         try {
@@ -37,23 +44,18 @@ const Home = () => {
         fetchProductos(categoriaId);
     };
 
-    // Función para agregar productos al carrito
     const agregarAlCarrito = (producto) => {
         setCarrito(prevCarrito => {
-            // Verificar si el producto ya está en el carrito
             const productoExistente = prevCarrito.find(p => p.id === producto.id);
             if (productoExistente) {
-                // Actualizar la cantidad si el producto ya existe en el carrito
                 return prevCarrito.map(p =>
                     p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
                 );
             }
-            // Agregar el producto al carrito con cantidad inicial de 1
             return [...prevCarrito, { ...producto, cantidad: 1 }];
         });
     };
 
-    // Función para actualizar la cantidad de un producto en el carrito
     const actualizarCantidad = (id, cantidad) => {
         setCarrito(prevCarrito => 
             prevCarrito.map(p => 
@@ -62,9 +64,20 @@ const Home = () => {
         );
     };
 
-    // Función para eliminar un producto del carrito
     const eliminarDelCarrito = (id) => {
         setCarrito(prevCarrito => prevCarrito.filter(p => p.id !== id));
+    };
+
+    // Función para calcular el total
+    const calcularTotal = () => {
+        return carrito.reduce((total, producto) => 
+            total + (producto.precio_unitario * producto.cantidad), 0).toFixed(2);
+    };
+
+    // Función para manejar el pago (aquí solo mostramos un alert)
+    const manejarPago = () => {
+        alert(`Total a pagar: $${calcularTotal()}`);
+        // Aquí podrías implementar la lógica para procesar el pago
     };
 
     return (
@@ -123,6 +136,10 @@ const Home = () => {
                             </li>
                         ))}
                     </ul>
+                    <div className="carrito-total">
+                        <p><strong>Total:</strong> ${calcularTotal()}</p>
+                        <button onClick={manejarPago}>Pagar</button>
+                    </div>
                 </div>
             </div>
         </div>
