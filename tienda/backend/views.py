@@ -44,4 +44,17 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         except Usuario.DoesNotExist:
             return Response({'valido': "False", 'mensaje': 'Usuario no existe'})
         
-        
+    
+    @action(detail=False, methods=['post'], url_path='register')
+    def register(self, request):
+        username = request.data.get('username')
+        password = hashlib.sha256(request.data.get('password').encode()).hexdigest()
+        nombre = request.data.get('nombre')
+
+        if Usuario.objects.filter(username=username).exists():
+            return Response({'valido': "False", 'mensaje': 'El usuario ya existe'}, status=status.HTTP_400_BAD_REQUEST)
+
+        usuario = Usuario(username=username, password=password, nombre=nombre)
+        usuario.save()
+
+        return Response({'valido': "True", 'mensaje': 'Usuario creado correctamente'}, status=status.HTTP_201_CREATED)

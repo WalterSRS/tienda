@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import Login from './components/Login';
 import Home from './components/Home';
+import Register from './components/Register';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Componente de ruta protegida
@@ -28,6 +29,8 @@ function App() {
           
           {/* Ruta protegida para Home */}
           <Route path="/home" element={<ProtectedRoute element={Home} />} />
+
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </React.Fragment>

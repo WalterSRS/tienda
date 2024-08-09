@@ -3,7 +3,7 @@ import '../assetss/css/Login.css';
 import logo from '../assetss/img/logo.png';
 import { Apiurl } from "../service/apirest";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     const [form, setForm] = useState({
@@ -60,6 +60,9 @@ const Login = () => {
                         <input type="submit" className="fadeIn fourth" value="Ingresar" />
                     </form>
                     {error && <div id="formFooter">{errorMsg}</div>}
+                    <div className="fadeIn fifth">
+                        <p>¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link></p>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
