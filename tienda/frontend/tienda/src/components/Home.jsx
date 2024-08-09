@@ -118,7 +118,7 @@ const Home = () => {
                                     <p><strong>Información:</strong> {producto.informacion}</p>
                                     <p><strong>Precio Unitario:</strong> ${producto.precio_unitario}</p>
                                     <p><strong>IVA:</strong> ${producto.iva}</p>
-                                    <button onClick={() => agregarAlCarrito(producto)}>Agregar al Carrito</button>
+                                    <button className="agregar-button" onClick={() => agregarAlCarrito(producto)}>Agregar al Carrito</button>
                                 </li>
                             ))}
                         </ul>

@@ -40,45 +40,43 @@ const Register = () => {
     };
 
     return (
-        <React.Fragment>
-            <div className="register-container">
+        <div className="register-container">
+            <form className="register-form" onSubmit={handleSubmit}>
                 <h2>Registro de Usuario</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Nombre de Usuario:</label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={form.username}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Nombre Completo:</label>
-                        <input
-                            type="text"
-                            name="nombre"
-                            value={form.nombre}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Contraseña:</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={form.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    {error && <p className="error-message">{errorMsg}</p>}
-                    <button type="submit">Registrarse</button>
-                </form>
-            </div>
-        </React.Fragment>
+                <div className="form-group">
+                    <label>Nombre de Usuario:</label>
+                    <input
+                        type="text"
+                        name="username"
+                        value={form.username}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Nombre Completo:</label>
+                    <input
+                        type="text"
+                        name="nombre"
+                        value={form.nombre}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Contraseña:</label>
+                    <input
+                        type="password"
+                        name="password"
+                        value={form.password}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                {error && <p className="error-message">{errorMsg}</p>}
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
     );
 };
 

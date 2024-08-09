@@ -1,0 +1,110 @@
+/* Register.css */
+
+html {
+    background-color: #56baed;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+}
+
+a {
+    color: #92badd;
+    display:inline-block;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+
+/* Estructura */
+.register-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+.register-form {
+    width: 100%;
+    max-width: 450px;
+    background-color: #fff; /* Fondo blanco para distinguir del fondo de la página */
+    padding: 30px;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+    border: 1px solid #ddd; /* Borde suave */
+}
+
+.register-form h2 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 20px 0;
+    color: #0818ac;
+    margin-left: 100px;
+}
+
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #0d0d0d;
+}
+
+input[type=text], input[type=password] {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px;
+    width: calc(100% - 30px);
+    font-size: 16px;
+    margin-top: 5px;
+    border: 2px solid #f6f6f6;
+    border-radius: 5px;
+    transition: all 0.5s ease-in-out;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #56baed;
+    border: none;
+    color: white;
+    padding: 15px 118px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    border-radius: 5px;
+    margin: 5px 20px 40px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #39ace7;
+}
+
+button:active {
+    transform: scale(0.95);
+}
