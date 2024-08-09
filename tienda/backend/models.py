@@ -7,11 +7,7 @@ class Usuario(models.Model):
     password = models.CharField(max_length=255)
     nombre = models.CharField(max_length=30)
     
-    def save(self, *args, **kwargs):
-        if len(self.password) != 255:
-            self.password = hashlib.sha256(self.password.encode()).hexdigest()
-        super().save(*args, **kwargs)
-        
+    
     
     
 class Categoria(models.Model):

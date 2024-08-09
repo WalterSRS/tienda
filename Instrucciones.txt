@@ -1,0 +1,11 @@
+Instrucciones para montar el servidor de Pyhton y React
+
+Para esta prueba se utilizo Python3
+
+Montar servidor en Python
+1.Lo primero que debemos hacer es abrir una terminal y ubicarnos dentro de la carpeta tienda, escribimos "cd tienda".
+2.Luego en la consola escribimos "python manage.py runserver", esto iniciara el servidor.
+
+Montar servidor en React
+1.Para montar el servidor debemos abrir otra terminal pero esta vez nos ubicaresmos en "cd tienda/frontend/tienda".
+2.Luego en la consola escribimos "npm start", esto iniciara el servidor y nos abrira una pagina en localhost:3000
