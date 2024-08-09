@@ -48,7 +48,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'], url_path='register')
     def register(self, request):
         username = request.data.get('username')
-        password = hashlib.sha256(request.data.get('password').encode()).hexdigest()
+        password = request.data.get('password')
         nombre = request.data.get('nombre')
 
         if Usuario.objects.filter(username=username).exists():
