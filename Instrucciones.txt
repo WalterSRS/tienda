@@ -1,5 +1,4 @@
 Instrucciones para montar el servidor de Python y React
-Video donde lo explico: https://youtu.be/PyQuaz23dQU
 
 Para esta prueba se utilizo Python3
 
